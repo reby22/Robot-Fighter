@@ -1,0 +1,749 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.11502064086533552 -0.11328055558891231 0.9868828541931381 4.6839694018586
+  position 0.08827923187616006 2.850034143345878 1.0314942774210423
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Solid {
+  rotation 0 1 0 0
+  children [
+    DEF Suelo Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../textures/arena.jpg"
+          ]
+        }
+        metalness 0
+      }
+      geometry Box {
+        size 3 3 0.1
+      }
+    }
+  ]
+  name "Suelo"
+  boundingObject USE Suelo
+}
+Solid {
+  translation 0 0 0.1
+  children [
+    DEF RING Group {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.1
+          }
+        }
+        Transform {
+          translation 0 0 0.001
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.1
+                radius 0.9
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.15 0 0.051
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 1 0
+              }
+              geometry Box {
+                size 0.1 0.6 1e-05
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.15 0 0.051
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 1 0
+              }
+              geometry Box {
+                size 0.1 0.6 1e-05
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  name "RING"
+  boundingObject USE RING
+}
+Robot {
+  translation -0.66 0 0.15
+  rotation 0 1 0 0
+  scale 1.8 1.8 1.8
+  children [
+    Transform {
+      translation 0 0 0.0415
+      rotation 0 0 1 1.570796
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.0820075 0.364731 0.8
+            roughness 1
+            metalness 0
+          }
+          geometry DEF BODY Cylinder {
+            height 0.08
+            radius 0.045
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 2.560000010572301
+        axis 0 1 0
+        anchor 0 0 0.025
+      }
+      device [
+        RotationalMotor {
+          name "left wheel motor"
+          consumptionFactor 70
+        }
+        PositionSensor {
+          name "left wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.04499999999999987 0.025
+        rotation -0.6731375927991021 0.6731370770694266 -0.3062225606239013 2.547281448439932
+        children [
+          DEF WHEEL Transform {
+            rotation 0.577656895078166 0.5771968951617173 -0.5771968951617173 -2.093935
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 1 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.025
+                }
+              }
+            ]
+          }
+        ]
+        name "left wheel"
+        boundingObject USE WHEEL
+        physics DEF PHYSICS_WHEEL Physics {
+          density -1
+          mass 0.05
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 2.5599999492504506
+        axis 0 1 0
+        anchor 0 0 0.025
+      }
+      device [
+        RotationalMotor {
+          name "right wheel motor"
+          consumptionFactor 70
+        }
+        PositionSensor {
+          name "right wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.04499999999999986 0.025
+        rotation -0.6977540555462173 0.697753994530228 -0.16210688167353385 2.8201749369637215
+        children [
+          USE WHEEL
+        ]
+        name "right wheel"
+        boundingObject USE WHEEL
+        physics USE PHYSICS_WHEEL
+      }
+    }
+    Transform {
+      translation 0.0385 -0.02 0.063
+      rotation -0.726828171413359 -0.4856551145357015 -0.48565411453546564 -1.884582
+      children [
+        DEF UNUSED_EYE Group {
+          children [
+            Transform {
+              translation 0 0 1e-05
+              rotation 0 0 1 0.8
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.975691 0.981481 0.0252992
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Box {
+                    size 0.02 0.005 0.005
+                  }
+                }
+              ]
+            }
+            Transform {
+              rotation 0 0 1 -0.8
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.975691 0.981481 0.0252992
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Box {
+                    size 0.02 0.005 0.005
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    Transform {
+      translation 0.0385 0.02 0.063
+      rotation -0.7268306455324123 0.4856527631523045 0.4856527631523045 -1.884578
+      children [
+        USE UNUSED_EYE
+      ]
+    }
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 0.5
+        metalness 0
+      }
+      geometry IndexedFaceSet {
+        coord Coordinate {
+          point [
+            0.015 0.038 -0.041
+            0.015 0.023 -0.041
+            0 0.023 -0.0455
+            -0.015 0.023 -0.041
+            -0.015 0.038 -0.041
+            0 0.038 -0.0455
+          ]
+        }
+        texCoord TextureCoordinate {
+          point [
+            0 0
+            0.5 0
+            1 0
+            1 1
+            0.5 1
+            0 1
+          ]
+        }
+        coordIndex [
+          0, 1, 2, 5, -1, 5, 2, 3, 4, -1
+        ]
+        texCoordIndex [
+          5, 0, 1, 4, -1, 4, 1, 2, 3, -1
+        ]
+        creaseAngle 0.9
+      }
+    }
+    TouchSensor {
+      translation 0.045002346267197894 -1.091007917689013e-10 0.019998785448632508
+      rotation 1 -1.360245974830965e-15 -6.732126046405796e-14 -3.141592307179585
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.6980390000000001
+            metalness 0
+          }
+          geometry DEF BUMPER Box {
+            size 0.02 0.09 0.02
+          }
+        }
+      ]
+      name "bumper"
+      boundingObject USE BUMPER
+      physics Physics {
+        density -1
+        mass 0.01
+      }
+      lookupTable [
+        0 0 0
+        0.01 1 0
+      ]
+    }
+    Camera {
+      translation 0.02 0 0.01
+      rotation 0 1 0 1.5707996938995747
+      name "CAM"
+      fieldOfView 0.7
+      far 0.05
+      recognition Recognition {
+        maxObjects 1
+      }
+    }
+    GPS {
+    }
+  ]
+  name "mybot"
+  boundingObject Transform {
+    translation 0 0 0.0415
+    rotation 0 0 1 1.570796
+    children [
+      USE BODY
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 0.5
+  }
+  controller "bumper"
+}
+Robot {
+  translation 0.74 1.34707e-17 0.15
+  rotation 0 0 1 3.141592653589793
+  scale 2 2 2
+  children [
+    Transform {
+      translation 0 0 0.0415
+      rotation 0 0 1 1.570796
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.0820075 0.364731 0.8
+            roughness 1
+            metalness 0
+          }
+          geometry DEF BODY Cylinder {
+            height 0.08
+            radius 0.045
+          }
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 2.560000010572301
+        axis 0 1 0
+        anchor 0 0 0.025
+      }
+      device [
+        RotationalMotor {
+          name "left wheel motor"
+          consumptionFactor 70
+        }
+        PositionSensor {
+          name "left wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.04500000000000001 0.025
+        rotation -0.6731375927991035 0.6731370770694255 -0.30622256062390113 2.5472814484399335
+        children [
+          DEF WHEEL Transform {
+            rotation 0.577656895078166 0.5771968951617173 -0.5771968951617173 -2.093935
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 1 0 0
+                  roughness 1
+                  metalness 0
+                }
+                geometry Cylinder {
+                  height 0.01
+                  radius 0.025
+                }
+              }
+            ]
+          }
+        ]
+        name "left wheel"
+        boundingObject USE WHEEL
+        physics DEF PHYSICS_WHEEL Physics {
+          density -1
+          mass 0.05
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 2.5599999492504506
+        axis 0 1 0
+        anchor 0 0 0.025
+      }
+      device [
+        RotationalMotor {
+          name "right wheel motor"
+          consumptionFactor 70
+        }
+        PositionSensor {
+          name "right wheel sensor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.044999999999999915 0.025
+        rotation -0.6977540555462168 0.6977539945302285 -0.1621068816735333 2.8201749369637206
+        children [
+          USE WHEEL
+        ]
+        name "right wheel"
+        boundingObject USE WHEEL
+        physics USE PHYSICS_WHEEL
+      }
+    }
+    Transform {
+      translation 0.0385 -0.02 0.063
+      rotation -0.726828171413359 -0.4856551145357015 -0.48565411453546564 -1.884582
+      children [
+        DEF UNUSED_EYE Group {
+          children [
+            Transform {
+              translation 0 0 1e-05
+              rotation 0 0 1 0.8
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.975691 0.981481 0.0252992
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Box {
+                    size 0.02 0.005 0.005
+                  }
+                }
+              ]
+            }
+            Transform {
+              rotation 0 0 1 -0.8
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.975691 0.981481 0.0252992
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Box {
+                    size 0.02 0.005 0.005
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    Transform {
+      translation 0.0385 0.02 0.063
+      rotation -0.7268306455324123 0.4856527631523045 0.4856527631523045 -1.884578
+      children [
+        USE UNUSED_EYE
+      ]
+    }
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.8 0.8 0.8
+        roughness 0.5
+        metalness 0
+      }
+      geometry IndexedFaceSet {
+        coord Coordinate {
+          point [
+            0.015 0.038 -0.041
+            0.015 0.023 -0.041
+            0 0.023 -0.0455
+            -0.015 0.023 -0.041
+            -0.015 0.038 -0.041
+            0 0.038 -0.0455
+          ]
+        }
+        texCoord TextureCoordinate {
+          point [
+            0 0
+            0.5 0
+            1 0
+            1 1
+            0.5 1
+            0 1
+          ]
+        }
+        coordIndex [
+          0, 1, 2, 5, -1, 5, 2, 3, 4, -1
+        ]
+        texCoordIndex [
+          5, 0, 1, 4, -1, 4, 1, 2, 3, -1
+        ]
+        creaseAngle 0.9
+      }
+    }
+    TouchSensor {
+      translation 0.045002346267197894 -1.091007917689013e-10 0.019998785448632508
+      rotation 1 -1.360245974830965e-15 -6.732126046405796e-14 -3.141592307179585
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+            roughness 0.6980390000000001
+            metalness 0
+          }
+          geometry DEF BUMPER Box {
+            size 0.02 0.09 0.02
+          }
+        }
+      ]
+      name "bumper"
+      boundingObject USE BUMPER
+      physics Physics {
+        density -1
+        mass 0.01
+      }
+      lookupTable [
+        0 0 0
+        0.01 1 0
+      ]
+    }
+    Camera {
+      translation 0.02 0 0.01
+      rotation 0 1 0 1.5707996938995747
+      name "CAM"
+      fieldOfView 0.7
+      far 0.05
+      recognition Recognition {
+        maxObjects 1
+      }
+    }
+    GPS {
+    }
+  ]
+  name "mybot(1)"
+  boundingObject Transform {
+    translation 0 0 0.0415
+    rotation 0 0 1 1.570796
+    children [
+      USE BODY
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 0.5
+  }
+  controller "bumper"
+}
+Solid {
+  translation -1.15 -1 0.38
+  rotation 0.2588189595935754 0.965925849201117 1.5847597525897036e-17 3.14159
+  scale 2 2 2
+  children [
+    Group {
+      children [
+        Shape {
+          appearance DEF gold1 PBRAppearance {
+            baseColor 1 0.8 0
+            metalness 0
+          }
+          geometry Cone {
+            bottomRadius 0.07
+            height 0.15
+          }
+        }
+        Transform {
+          translation 0 0 0.1
+          rotation 1 0 0 3.141592653589793
+          children [
+            Shape {
+              appearance USE gold1
+              geometry Cone {
+                bottomRadius 0.05
+                height 0.1
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.15
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0
+                metalness 0
+              }
+              geometry Box {
+                size 0.13 0.11 0.02
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.06 0 -0.05
+          rotation 0 0 1 1.5708003061004252
+          children [
+            Shape {
+              appearance USE gold1
+              geometry Box {
+                size 0.01 0.1 0.01
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.06 0 -0.05
+          rotation 0 0 1 1.5708003061004252
+          children [
+            Shape {
+              appearance USE gold1
+              geometry Box {
+                size 0.01 0.1 0.01
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.0529289 7.25504e-08 0.0016
+          rotation 0.3574058186283875 0.35740681862788 0.8628565621288802 1.71777
+          children [
+            Shape {
+              appearance DEF gold PBRAppearance {
+                baseColor 1 0.8 0
+              }
+              geometry Box {
+                size 0.01 0.15 0.01
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.0494974 1.05809e-07 0.00159982
+          rotation 0.6785982482200877 0.6785982482200877 0.2810851028163115 2.59356
+          children [
+            Shape {
+              appearance DEF gold PBRAppearance {
+                baseColor 1 0.8 0
+              }
+              geometry Box {
+                size 0.01 0.15 0.01
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  name "COPA"
+}
+Solid {
+  translation 1.14 -1.21 0.19
+  rotation 0.25056300542381216 0.9351130202419243 0.25056300542381216 -1.6378353071795866
+  children [
+    Group {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.09
+            radius 0.1
+          }
+        }
+        Transform {
+          translation 0 0 0.01
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 0 0.4
+              }
+              geometry Cylinder {
+                height 0.1
+                radius 0.02
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.12 -0.07 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.1
+                radius 0.02
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0.060622 -0.105 0
+          rotation 0 0 1 0.523599
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 0.8 0
+                metalness 0
+              }
+              geometry Box {
+                size 0.15 0.02 0.05
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.0530383 -0.10866 0
+          rotation 0 0 -1 0.523596
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 0.8 0
+                metalness 0
+              }
+              geometry Box {
+                size 0.12 0.02 0.05
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.114378 -0.00366 0
+          rotation 0 0 1 -1.5707953071795862
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 0.8 0
+                metalness 0
+              }
+              geometry Box {
+                size 0.2 0.04 0.06
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
